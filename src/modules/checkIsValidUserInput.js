@@ -9,7 +9,25 @@
  * @return {boolean} - True if the user input is valid, false otherwise
  */
 function checkIsValidUserInput(userInput) {
-  /* Write your code here */
+  if (userInput.length !== 4) {
+    return 'length is 4';
+  }
+
+  const counts = {};
+
+  for (const digit of userInput) {
+    if (isNaN(Number(digit))) {
+      return 'all symbols must be numbers';
+    }
+
+    if (counts[digit]) {
+      return 'please do not repeat numbers';
+    }
+
+    counts[digit] = 1;
+  }
+
+  return null;
 }
 
 module.exports = {
