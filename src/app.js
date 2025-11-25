@@ -23,7 +23,7 @@ function askGuess() {
       return askGuess();
     }
 
-    const { bulls, cows } = getBullsAndCows(secret, number);
+    const { bulls, cows } = getBullsAndCows(number, secret);
 
     console.log(`cows: ${cows}, bulls: ${bulls}`);
 
