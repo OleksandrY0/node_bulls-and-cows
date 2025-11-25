@@ -12,17 +12,31 @@
  * @return {object} An object containing the number of bulls and cows.
  * Example: { bulls: 1, cows: 2 }
  */
-function getBullsAndCows(userInput, numberToGuess) {
-  const s = numberToGuess.toString();
-  const g = userInput.toString();
+function getBullsAndCows(secret, guess) {
+  const s = secret.toString();
+  const g = guess.toString();
+
   let bulls = 0;
   let cows = 0;
+
+  const secretLeft = [];
+  const guessLeft = [];
 
   for (let i = 0; i < 4; i++) {
     if (g[i] === s[i]) {
       bulls++;
-    } else if (s.includes(g[i])) {
+    } else {
+      secretLeft.push(s[i]);
+      guessLeft.push(g[i]);
+    }
+  }
+
+  for (const d of guessLeft) {
+    const idx = secretLeft.indexOf(d);
+
+    if (idx !== -1) {
       cows++;
+      secretLeft.splice(idx, 1);
     }
   }
 
