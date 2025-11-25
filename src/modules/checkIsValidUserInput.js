@@ -10,24 +10,26 @@
  */
 function checkIsValidUserInput(userInput) {
   if (userInput.length !== 4) {
-    return 'length is 4';
+    return false;
   }
 
-  const counts = {};
-
-  for (const digit of userInput) {
-    if (isNaN(Number(digit))) {
-      return 'all symbols must be numbers';
-    }
-
-    if (counts[digit]) {
-      return 'please do not repeat numbers';
-    }
-
-    counts[digit] = 1;
+  if (userInput[0] === '0') {
+    return false;
   }
 
-  return null;
+  // must be digits
+  if (!/^\d+$/.test(userInput)) {
+    return false;
+  }
+
+  // duplicates check
+  const set = new Set(userInput);
+
+  if (set.size !== 4) {
+    return false;
+  }
+
+  return true;
 }
 
 module.exports = {
