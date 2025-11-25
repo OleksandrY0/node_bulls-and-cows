@@ -15,15 +15,19 @@ const terminal = readline.createInterface({
 
 function askGuess() {
   terminal.question('Try to guess a number (****): ', (number) => {
-    const error = checkIsValidUserInput(number);
+    const isValid = checkIsValidUserInput(number);
 
-    if (error) {
-      console.log(error);
+    // FIX: now check for false, not "error"
+    if (!isValid) {
+      console.log(
+        'Invalid input — enter a 4-digit number, no duplicates, no leading 0.',
+      );
 
       return askGuess();
     }
 
-    const { bulls, cows } = getBullsAndCows(number, secret);
+    // FIX: correct order: secret first, guess second
+    const { bulls, cows } = getBullsAndCows(secret, number);
 
     console.log(`cows: ${cows}, bulls: ${bulls}`);
 
